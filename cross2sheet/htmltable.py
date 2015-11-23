@@ -11,8 +11,6 @@ class _GridHTMLTableParser(html.parser.HTMLParser):
     def __init__(self,stylefunc):
         super().__init__()
         self.elts = []
-        self.row = -1
-        self.col = -1
         self.height = 0
         self.width = 0
         self.intd = False
@@ -23,20 +21,26 @@ class _GridHTMLTableParser(html.parser.HTMLParser):
         g.features.extend(self.elts)
         return g
 
+    def add_element(self,e):
+        self.elts.append((self.row,self.col,e))
+        if self.row>=self.height:
+            self.height=self.row+1
+        if self.col>=self.width:
+            self.width=self.col+1
+
     def handle_starttag(self,tag,attrs):
         self.intd=False
+        if tag=='table':
+            self.row=-1
+            self.col=-1
         if tag=='tr':
             self.row+=1
-            if self.row>=self.height:
-                self.height=self.row+1
             self.col=-1
         elif tag=='td':
             self.col+=1
-            if self.col>=self.width:
-                self.width=self.col+1
             self.intd=True
             for st in self.stylefunc(dict(attrs)):
-                self.elts.append((self.row,self.col,st))
+                self.add_element(st)
 
     def handle_endtag(self,tag):
         if tag=='td':
@@ -44,8 +48,9 @@ class _GridHTMLTableParser(html.parser.HTMLParser):
 
     def handle_data(self,data):
         if self.intd:
-            self.elts.append(self.row,self.col,TextElt(data))
+            self.add_element(TextElt(data))
 
+# TODO: add some way of picking out a particular table
 def parse_html_table(text,stylefunc=None,styleattr=None,styledict=None):
     '''
     Parses an html table.

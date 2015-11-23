@@ -15,8 +15,14 @@ Supported input formats:
 Supported output formats:
 * xlsx
 
-A command line interface is planned.  In the meantime, there are some example
-uses of the API in ```cross2sheet/examples/examples.py```.
+The `cross2sheet.main` module includes a command line program that will
+hopefully work most of the time.  For example, you can try the following:
+```
+python -m cross2sheet.main http://web.mit.edu/puzzle/www/2014/puzzle/puzzle_with_answer_nowhere_man/grid.png nowhere_man.xlsx
+python -m cross2sheet.main http://web.mit.edu/puzzle/www/2015/puzzle/rid_fill/ rid_fill.xlsx
+```
+
+There some example uses of the API in `cross2sheet/examples/examples.py`.
 
 Required software
 =================

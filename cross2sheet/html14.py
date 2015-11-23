@@ -55,7 +55,7 @@ class _GridHTMLParser(html.parser.HTMLParser):
     def handle_endtag(self,tag):
         self.active_elt = None
 
-def parse_html_grid(text,border=True):
+def parse_html_grid(text):
     p = _GridHTMLParser()
     if isinstance(text,bytes):
         text=text.decode()

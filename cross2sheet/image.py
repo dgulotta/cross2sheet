@@ -8,6 +8,8 @@ class ImageGrid:
     def __init__(self,data):
         arr=numpy.asarray(bytearray(data),dtype=numpy.uint8)
         self.img=cv2.imdecode(arr,cv2.IMREAD_COLOR)
+        if self.img is None:
+            raise ValueError('Image data not recognized')
         self.gray=cv2.cvtColor(self.img,cv2.COLOR_BGR2GRAY)
         self.breaks=self.detect_breaks()
 
@@ -120,7 +122,6 @@ class ImageGrid:
             for c,xs in enumerate(self._cell_slices(1)):
                 small = self.gray[ys,xs]
                 rect = self._find_text_rect(small)
-                print(r,c,small.shape,rect)
                 if not rect:
                     continue
                 small = small[rect]

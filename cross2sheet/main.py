@@ -15,7 +15,8 @@ def read(string):
         req.close()
         return data
     else:
-        return read('file://'+string)
+        with open(string,'rb') as f:
+            return f.read()
 
 class ReadFailed(Exception):
     pass

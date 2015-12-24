@@ -62,6 +62,15 @@ def process(grid,args):
 def save(grid,args):
     save_xlsx(grid,args.output_file,text_in_cells=args.number_in_cell,text_in_comments=args.number_in_comment)
 
+def boolean_arg(s):
+    sl=s.lower()
+    if sl in ['y','yes','t','true','1','on']:
+        return True
+    elif sl in ['n','no','f','false','0','off']:
+        return False
+    else:
+        raise ValueError('Unrecognized value %s'%s)
+
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description='Convert a crossword to a spreadsheet.')
     parser.add_argument('input_file_or_url',type=str)
@@ -69,13 +78,13 @@ if __name__=='__main__':
     parser.add_argument('--detect-background',type=bool,default=True)
     # Detecting bars in crosswords without them appears to be
     # harmless, as bars just get added between dark squares
-    parser.add_argument('--detect-bars',type=bool,default=True)
-    parser.add_argument('--autonumber',type=bool)
-    parser.add_argument('--autonumber-cells-with-text',type=bool,default=False)
-    parser.add_argument('--ocr-text',type=bool,default=False)
-    parser.add_argument('--number-in-comment',type=bool,default=True)
-    parser.add_argument('--number-in-cell',type=bool,default=True)
-    parser.add_argument('--outer-border',type=bool,default=True)
+    parser.add_argument('--detect-bars',type=boolean_arg,default=True)
+    parser.add_argument('--autonumber',type=boolean_arg)
+    parser.add_argument('--autonumber-cells-with-text',type=boolean_arg,default=False)
+    parser.add_argument('--ocr-text',type=boolean_arg,default=False)
+    parser.add_argument('--number-in-comment',type=boolean_arg,default=True)
+    parser.add_argument('--number-in-cell',type=boolean_arg,default=True)
+    parser.add_argument('--outer-border',type=boolean_arg,default=True)
     parser.add_argument('--color-attribute',type=str)
     parser.add_argument('--color-value-dark',type=str)
     args=parser.parse_args()

@@ -29,12 +29,13 @@ class _CellStyle:
             kwargs['border']=Border(**kwa)
         return Style(**kwargs)
 
-def write_sheet(grid,ws,text_in_cells=True,text_in_comments=False):
+def write_sheet(grid,ws,text_in_cells=True,text_in_comments=False,leave_white_blank=True):
     styles = collections.defaultdict(_CellStyle)
     for r,c,elt in grid.features:
         cell = ws.cell(row=r+1,column=c+1)
         if isinstance(elt,BackgroundElt):
-            styles[r,c].color=elt.color
+            if not (elt.color==0xFFFFFF and leave_white_blank):
+                styles[r,c].color=elt.color
         elif isinstance(elt,TextElt):
             if text_in_cells:
                 cell.value=elt.text
@@ -47,18 +48,18 @@ def write_sheet(grid,ws,text_in_cells=True,text_in_comments=False):
     for d in ws.column_dimensions.values():
         d.width=3
 
-def to_openpyxl(grid,text_in_cells=True,text_in_comments=False):
+def to_openpyxl(grid,**kwargs):
     wb = Workbook()
-    write_sheet(grid,wb.active,text_in_cells,text_in_comments)
+    write_sheet(grid,wb.active,**kwargs)
     return wb
 
-def to_openpyxl_multi(grids,text_in_cells=True,text_in_comments=False):
+def to_openpyxl_multi(grids,**kwargs):
     wb = Workbook()
     wb.remove_sheet(wb.active)
     for grid in grids:
         ws = wb.create_sheet()
-        write_sheet(grid,ws,text_in_cells,text_in_comments)
+        write_sheet(grid,ws,**kwargs)
     return wb
 
-def save_xlsx(grid,filename,text_in_cells=True,text_in_comments=False):
-    return to_openpyxl(grid,text_in_cells,text_in_comments).save(filename)
+def save_xlsx(grid,filename,**kwargs):
+    return to_openpyxl(grid,**kwargs).save(filename)

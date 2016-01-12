@@ -27,9 +27,11 @@ There some example uses of the API in `cross2sheet/examples/examples.py`.
 Required software
 =================
 The code is written in Python 3.  It is tested with version 3.4 but might also
-work with other versions.  The following modules are used:
-* cv2, numpy : image input
-* pyopenxl : xlsx output
+work with other versions.  The following packages are used:
+* OpenCV 3 : image input
+* OpenPyXL : xlsx output
+
+There is no PyPi package for OpenCV, so you will need to install it manually.
 
 The `tesseract` command line program can be used to read numbers in the grid, but in
 most cases it is better to have cross2sheet guess where the numbers go.

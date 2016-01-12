@@ -8,8 +8,6 @@ setup(
     version=VERSION,
     packages=find_packages(),
     install_requires=[
-        'cv2',
-        'numpy',
         'openpyxl'
     ],
 )

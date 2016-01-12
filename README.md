@@ -29,6 +29,7 @@ Required software
 The code is written in Python 3.  It is tested with version 3.4 but might also
 work with other versions.  The following packages are used:
 * OpenCV 3 : image input
+* BeautifulSoup 4 : html input
 * OpenPyXL : xlsx output
 
 There is no PyPi package for OpenCV, so you will need to install it manually.

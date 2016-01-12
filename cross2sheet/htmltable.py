@@ -3,52 +3,36 @@ Reads grids that are formatted as HTML tables, provided a function that interpre
 information.
 """
 
-import bisect, html.parser, re
+import bisect, re
 from cross2sheet.grid_features import *
+from bs4 import BeautifulSoup
 
-class _GridHTMLTableParser(html.parser.HTMLParser):
+class TableParser:
 
-    def __init__(self,stylefunc):
-        super().__init__()
+    def __init__(self):
         self.elts = []
         self.height = 0
         self.width = 0
-        self.intd = False
-        self.stylefunc=stylefunc
 
     def grid(self):
         g = Grid(self.height,self.width)
         g.features.extend(self.elts)
         return g
 
-    def add_element(self,e):
-        self.elts.append((self.row,self.col,e))
-        if self.row>=self.height:
-            self.height=self.row+1
-        if self.col>=self.width:
-            self.width=self.col+1
+    def add_element(self,y,x,e):
+        self.elts.append((y,x,e))
+        if y>=self.height:
+            self.height=y+1
+        if x>=self.width:
+            self.width=x+1
 
-    def handle_starttag(self,tag,attrs):
-        self.intd=False
-        if tag=='table':
-            self.row=-1
-            self.col=-1
-        if tag=='tr':
-            self.row+=1
-            self.col=-1
-        elif tag=='td':
-            self.col+=1
-            self.intd=True
-            for st in self.stylefunc(dict(attrs)):
-                self.add_element(st)
-
-    def handle_endtag(self,tag):
-        if tag=='td':
-            self.intd=False
-
-    def handle_data(self,data):
-        if self.intd:
-            self.add_element(TextElt(data))
+    def parse(self,table,stylefunc):
+        for y,row in enumerate(table.find_all('tr')):
+            for x,elt in enumerate(row.find_all('td')):
+                for st in stylefunc(elt.attrs):
+                    self.add_element(y,x,st)
+                if(elt.text):
+                    self.add_element(y,x,TextElt(elt.text))
 
 # TODO: add some way of picking out a particular table
 def parse_html_table(text,stylefunc=None,styleattr=None,styledict=None):
@@ -64,10 +48,14 @@ def parse_html_table(text,stylefunc=None,styleattr=None,styledict=None):
             raise ValueError('Either stylefunc or styleattr is required')
         def stylefunc(attrs):
             a = attrs.get(styleattr)
+            if isinstance(a,list):
+                a=' '.join(a)
             if a in styledict:
                 return [BackgroundElt(styledict[a])]
             else:
                 return []
-    p = _GridHTMLTableParser(stylefunc)
-    p.feed(text)
-    return p.grid()
+    soup=BeautifulSoup(text)
+    parser=TableParser()
+    for table in soup.find_all('table'):
+        parser.parse(table,stylefunc)
+    return parser.grid()

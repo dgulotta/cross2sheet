@@ -5,7 +5,6 @@ import urllib.request
 from cross2sheet.excel import save_xlsx
 from cross2sheet.html14 import parse_html_grid
 from cross2sheet.htmltable import parse_html_table
-from cross2sheet.image import ImageGrid
 from cross2sheet.transforms import autonumber, outside_bars
 
 def read(string):
@@ -18,14 +17,24 @@ def read(string):
         with open(string,'rb') as f:
             return f.read()
 
+class NotRecognized(Exception):
+    pass
+
 class ReadFailed(Exception):
     pass
 
 def read_image(data,args):
     try:
+        from cross2sheet.image import ImageGrid
+    except ImportError as e:
+        if e.name in ('cv2','numpy'):
+            raise NotRecognized('Image detection disabled because the module %s was not found.'%e.name)
+        else:
+            raise e
+    try:
         img=ImageGrid(data)
     except ValueError:
-        raise ReadFailed
+        raise NotRecognized
     grid=img.grid()
     if args.detect_background:
         grid.features.extend(img.read_background())
@@ -39,19 +48,31 @@ def read_image(data,args):
         args.autonumber=not (args.autonumber_cells_with_text or args.ocr_text)
     return grid
 
-def read_data(data,args):
+def read_html(data,args):
     try:
-        return read_image(data,args)
-    except ReadFailed:
-        pass
-    data=data.decode()
+        data=data.decode()
+    except UnicodeDecodeError:
+        raise NotRecognized
     if '<div class="bk"' in data:
         return parse_html_grid(data)
     elif '<table' in data:
         if not args.color_attribute:
-            raise ReadFailed('HTML contains a table, but --color-attribute not specified.  Try specifying --color-attribute and --color-value-dark, or taking a screenshot.')
+            raise NotRecognized('HTML contains a table, but --color-attribute not specified.  Try specifying --color-attribute and --color-value-dark.')
         return parse_html_table(data,styleattr=args.color_attribute,styledict={args.color_value_dark:0})
-    raise ReadFailed('File format not recognized.  If the grid is an HTML file, try taking a screenshot.  If the grid is an image file, try converting it to PNG format.')
+    else:
+        raise NotRecognized
+
+def read_data(data,args):
+    errors = []
+    for fn in (read_image,read_html):
+        try:
+            return fn(data,args)
+        except NotRecognized as e:
+            errors.extend(e.args)
+    msg='Error: file format not recognized.  If the grid is an HTML file, try taking a screenshot.  If the grid is an image file, try converting it to PNG format.'
+    if errors:
+        msg='%s\nThe following warnings were encountered:\n%s'%(msg,'\n'.join(errors))
+    raise ReadFailed(msg)
 
 def process(grid,args):
     if args.autonumber:
@@ -92,6 +113,8 @@ if __name__=='__main__':
     try:
         grid=read_data(data,args)
     except ReadFailed as e:
-        parser.error(e.args[0])
+        import sys
+        print(e.args[0],file=sys.stderr)
+        sys.exit(65)
     process(grid,args)
     save(grid,args)

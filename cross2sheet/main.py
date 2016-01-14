@@ -96,7 +96,7 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description='Convert a crossword to a spreadsheet.')
     parser.add_argument('input_file_or_url',type=str)
     parser.add_argument('output_file',type=str)
-    parser.add_argument('--detect-background',type=bool,default=True)
+    parser.add_argument('--detect-background',type=boolean_arg,default=True)
     # Detecting bars in crosswords without them appears to be
     # harmless, as bars just get added between dark squares
     parser.add_argument('--detect-bars',type=boolean_arg,default=True)

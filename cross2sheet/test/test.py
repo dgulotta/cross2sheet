@@ -1,6 +1,6 @@
 import unittest
 from cross2sheet.image import ImageGrid
-from cross2sheet.transforms import outside_bars
+from cross2sheet.transforms import autonumber, outside_bars
 from urllib.request import urlopen
 from io import StringIO
 
@@ -43,6 +43,14 @@ def bars_to_string(l):
                 grid[2*y+2][2*x+2]='+'
     return '\n'.join(''.join(r) for r in grid)
 
+def labels_to_string(l):
+    ymax=max(y for y,_,_ in l)
+    xmax=max(x for _,x,_ in l)
+    grid=[[' ' for x in range(xmax+1)] for y in range(ymax+1)]
+    for y,x,t in l:
+        grid[y][x]='*'
+    return '\n'.join(''.join(r) for r in grid)
+
 class ImageTest(unittest.TestCase):
 
     def setUp(self):
@@ -67,3 +75,12 @@ class ImageTest(unittest.TestCase):
                 grid.features.extend(outside_bars(grid))
                 b=bars_to_string(grid.features)
                 self.assertEqual(self.bars.strip(),b.strip())
+        if hasattr(self,'cells_with_text'):
+            with self.subTest('cells_with_text'):
+                if self.cells_with_text=='auto':
+                    grid=self.img.grid()
+                    grid.features.extend(self.img.read_background())
+                    grid.features.extend(self.img.read_bars())
+                    self.cells_with_text=labels_to_string(autonumber(grid))
+                t=labels_to_string(self.img.autonumber_if_text_found())
+                self.assertEqual(self.cells_with_text.strip(),t.strip())

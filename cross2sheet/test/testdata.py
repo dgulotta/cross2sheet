@@ -48,6 +48,7 @@ O............
 |             |           |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+
 '''
+    cells_with_text='auto'
 
 class CrossPollinationA(ImageTest):
     url='2014/puzzle/cross_pollination/A.png'
@@ -162,6 +163,7 @@ class Laureate(ImageTest):
 |             |           |       |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 '''
+    cells_with_text='auto'
 
 class NinetyNineCentsAClue(ImageTest):
     url='2009/puzzles/99_cents_a_clue/PUZZLE/grid.png'
@@ -184,6 +186,7 @@ O........#.....
 .#.#.#.#.#.#O#.
 .....#.......O.
 '''
+    cells_with_text='auto'
 
 class WorldsTallestCryptic(ImageTest):
     url='2008/world_s_tallest_cryptic/images/worldstallest.jpg'
@@ -219,6 +222,7 @@ class GridWithAHoleInTheMiddle(ImageTest):
 |         |         | |
 +-+-+-+-+-+-+-+-+-+-+-+
 '''
+    cells_with_text='auto'
 
 class WhoaIKnowWindows(ImageTest):
     url='2003/www.acme-corp.com/teamGuest/Training/images/windows.jpg'
@@ -251,6 +255,7 @@ class WhoaIKnowWindows(ImageTest):
 |             |         |
 +-+-+-+-+-+-+-+-+-+-+-+-+
 '''
+    cells_with_text='auto'
 
 class InnerTube(ImageTest):
     url='2000/set3/1/grid.jpg'
@@ -285,6 +290,7 @@ class InnerTube(ImageTest):
 |         |               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+
 '''
+    cells_with_text='auto'
 
 class TheWickedSwitch(ImageTest):
     url='2012/puzzles/a_circus_line/the_wicked_switch/1.png'
@@ -305,6 +311,7 @@ class TheWickedSwitch(ImageTest):
 ....#....#...
 ....#....#...
 '''
+    cells_with_text='auto'
 
 class PacificOvertones(ImageTest):
     url='2012/puzzles/ben_bitdiddle/pacific_overtones/1.png'
@@ -383,6 +390,7 @@ class  DualSingularities(ImageTest):
 .....#.....#.....
 .....#.....#.....
 '''
+    cells_with_text='auto'
 
 class Unspeakable(ImageTest):
     url='2007/puzzles/unspeakable/grid-1.png'
@@ -413,6 +421,7 @@ class Unspeakable(ImageTest):
 |       |       |     |
 +-+-+-+-+-+-+-+-+-+-+-+
 '''
+    cells_with_text='auto'
 
 class DealingWithChange(ImageTest):
     url='2003/www.acme-corp.com/teamGuest/4/images/dealing-with-change.jpg'
@@ -456,6 +465,7 @@ class QED(ImageTest):
 ....#....
 ....#....
 '''
+    cells_with_text='auto'
 
 class PipeDream2(ImageTest):
     url='2011/puzzles/world1/pipe_dream_2/assets/grid.png'
@@ -501,5 +511,6 @@ class GoodTimesInTheCasino(ImageTest):
 .#.#.#.#.#.#.#.#.#.#.
 ........#....##......
 '''
+    cells_with_text='auto'
 
 del ImageTest

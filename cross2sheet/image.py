@@ -78,7 +78,7 @@ class ImageGrid:
         numbers=[]
         for r,ys in enumerate(self._cell_slices(0)):
             for c,xs in enumerate(self._cell_slices(1)):
-                if self._find_text_rect(self.gray[ys,xs]):
+                if self._has_text_rect(self.gray[ys,xs]):
                     numbers.append((r,c,TextElt(str(next(n)))))
         return numbers
 
@@ -91,6 +91,18 @@ class ImageGrid:
         x,y,w,h=cv2.boundingRect(numpy.concatenate(con[:-1]))
         if w*h>=15:
             return (slice(y-1,y+h+1),slice(x-1,x+w+1))
+
+    @staticmethod
+    def _has_text_rect(img):
+        _,thr = cv2.threshold(img,128,255,cv2.THRESH_BINARY)
+        _,con,_ = cv2.findContours(thr,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+        if len(con)>=2:
+            return True
+        elif len(con)==1:
+            x,y,w,h=cv2.boundingRect(numpy.concatenate(con[0]))
+            return cv2.arcLength(con[0],True)>2*w+2*h
+        else:
+            return False
 
     def read_bars(self):
         hbars=self._find_bars(lambda x,y: (x,y))

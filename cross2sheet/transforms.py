@@ -51,3 +51,8 @@ def outside_bars(grid):
         new_elts.append((0,n,BorderElt('T')))
         new_elts.append((grid.height-1,n,BorderElt('B')))
     return new_elts
+
+def pad(grid,rows,cols):
+    grid.height+=rows
+    grid.width+=cols
+    grid.features=[(y+rows,x+cols,e) for y,x,e in grid.features]

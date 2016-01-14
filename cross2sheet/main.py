@@ -5,7 +5,7 @@ import urllib.request
 from cross2sheet.excel import save_xlsx
 from cross2sheet.html14 import parse_html_grid
 from cross2sheet.htmltable import parse_html_table
-from cross2sheet.transforms import autonumber, outside_bars
+from cross2sheet.transforms import autonumber, outside_bars, pad
 
 def read(string):
     if '://' in string:
@@ -79,6 +79,7 @@ def process(grid,args):
         grid.features.extend(autonumber(grid))
     if args.outer_border:
         grid.features.extend(outside_bars(grid))
+    pad(grid,*args.padding)
 
 def save(grid,args):
     save_xlsx(grid,args.output_file,text_in_cells=args.number_in_cell,text_in_comments=args.number_in_comment)
@@ -96,6 +97,7 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description='Convert a crossword to a spreadsheet.')
     parser.add_argument('input_file_or_url',type=str)
     parser.add_argument('output_file',type=str)
+    parser.add_argument('--padding',type=int,nargs=2,default=(1,3),help='The number of blank rows and columns to add on the top and left of the grid')
     parser.add_argument('--detect-background',type=boolean_arg,default=True,help='Determines whether to detect the background color of the cells.')
     # Detecting bars in crosswords without them appears to be
     # harmless, as bars just get added between dark squares

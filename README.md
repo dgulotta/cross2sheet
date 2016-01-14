@@ -21,6 +21,7 @@ hopefully work most of the time.  For example, you can try the following:
 python -m cross2sheet.main http://web.mit.edu/puzzle/www/2014/puzzle/puzzle_with_answer_nowhere_man/grid.png nowhere_man.xlsx
 python -m cross2sheet.main http://web.mit.edu/puzzle/www/2015/puzzle/rid_fill/ rid_fill.xlsx
 ```
+To see the full list of options supported by the program, run `python -m cross2sheet.main -h`.
 
 There some example uses of the API in `cross2sheet/examples/examples.py`.
 

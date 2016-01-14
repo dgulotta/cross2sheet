@@ -93,21 +93,30 @@ def boolean_arg(s):
     else:
         raise ValueError('Unrecognized value %s'%s)
 
+class ToggleAction(argparse.Action):
+
+    def __init__(self,*args,**kwargs):
+        kwargs.setdefault('metavar','{y,n}')
+        super().__init__(*args,**kwargs)
+
+    def __call__(self,parser,namespace,values,option_string=None):
+        setattr(namespace,self.dest,boolean_arg(values))
+
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description='Convert a crossword to a spreadsheet.')
     parser.add_argument('input_file_or_url',type=str)
     parser.add_argument('output_file',type=str)
-    parser.add_argument('--padding',type=int,nargs=2,default=(1,3),help='The number of blank rows and columns to add on the top and left of the grid')
-    parser.add_argument('--detect-background',type=boolean_arg,default=True,help='Determines whether to detect the background color of the cells.')
+    parser.add_argument('--padding',type=int,nargs=2,default=(1,3),metavar=('ROWS','COLS'),help='The number of blank rows and columns to add on the top and left of the grid')
+    parser.add_argument('--detect-background',action=ToggleAction,default=True,help='Determines whether to detect the background color of the cells.')
     # Detecting bars in crosswords without them appears to be
     # harmless, as bars just get added between dark squares
-    parser.add_argument('--detect-bars',type=boolean_arg,default=True,help='Determines whether to detect the cell border is thick or thin.')
-    parser.add_argument('--autonumber',type=boolean_arg,help='Determines whether clue numbers will automatically be added in the cells that would be expected to have them under the usual crossword numbering conventions.')
-    parser.add_argument('--autonumber-cells-with-text',type=boolean_arg,default=False,help='Determines whether clue numbers will be added in sequential order in cells that appear to have text in them.  (This is not too reliable.)')
-    parser.add_argument('--ocr-text',type=boolean_arg,default=False,help="Determines whether to use the 'tesseract' program to recognize clue numbers.  (This is very unreliable.)")
-    parser.add_argument('--number-in-comment',type=boolean_arg,default=True,help='Determines whether to write the clue numbers in comments.  (A triangle will appear in the corner of the cell, and hovering over it will reveal the clue number.)')
-    parser.add_argument('--number-in-cell',type=boolean_arg,default=True,help='Determines whether to write the clue numbers in the spreadsheet cells.')
-    parser.add_argument('--outer-border',type=boolean_arg,default=True,help='Determines whether to draw a border around the outside of the grid.')
+    parser.add_argument('--detect-bars',action=ToggleAction,default=True,help='Determines whether to detect the cell border is thick or thin.')
+    parser.add_argument('--autonumber',action=ToggleAction,help='Determines whether clue numbers will automatically be added in the cells that would be expected to have them under the usual crossword numbering conventions.')
+    parser.add_argument('--autonumber-cells-with-text',action=ToggleAction,default=False,help='Determines whether clue numbers will be added in sequential order in cells that appear to have text in them.  (This is not too reliable.)')
+    parser.add_argument('--ocr-text',action=ToggleAction,default=False,help="Determines whether to use the 'tesseract' program to recognize clue numbers.  (This is very unreliable.)")
+    parser.add_argument('--number-in-comment',action=ToggleAction,default=True,help='Determines whether to write the clue numbers in comments.  (A triangle will appear in the corner of the cell, and hovering over it will reveal the clue number.)')
+    parser.add_argument('--number-in-cell',action=ToggleAction,default=True,help='Determines whether to write the clue numbers in the spreadsheet cells.')
+    parser.add_argument('--outer-border',action=ToggleAction,default=True,help='Determines whether to draw a border around the outside of the grid.')
     parser.add_argument('--color-attribute',type=str,help='(HTML table input) The name of the attribute that determines whether the cell is light or dark.')
     parser.add_argument('--color-value-dark',type=str,help='(HTML table input) The value of the above attribute when the cell is dark.')
     args=parser.parse_args()

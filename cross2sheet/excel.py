@@ -47,6 +47,11 @@ def write_sheet(grid,ws,text_in_cells=True,text_in_comments=False,leave_white_bl
         ws.cell(row=r+1,column=c+1).style=s.style()
     for d in ws.column_dimensions.values():
         d.width=3
+    # Google Sheets seems to truncate sheets with no data at 10 columns, so
+    # make sure the bottom right cell isn't empty
+    bottom_right=ws.cell(row=grid.height,column=grid.width)
+    if not bottom_right.value:
+        bottom_right.value=' '
 
 def to_openpyxl(grid,**kwargs):
     wb = Workbook()

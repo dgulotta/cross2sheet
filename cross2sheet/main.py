@@ -37,7 +37,7 @@ def read_image(data,args):
         raise NotRecognized
     grid=img.grid()
     if args.detect_background:
-        grid.features.extend(img.read_background())
+        grid.features.extend(img.read_background(args.color_levels))
     if args.detect_bars:
         grid.features.extend(img.read_bars())
     if args.autonumber_cells_with_text:
@@ -117,6 +117,7 @@ if __name__=='__main__':
     parser.add_argument('--number-in-comment',action=ToggleAction,default=True,help='Determines whether to write the clue numbers in comments.  (A triangle will appear in the corner of the cell, and hovering over it will reveal the clue number.)')
     parser.add_argument('--number-in-cell',action=ToggleAction,default=True,help='Determines whether to write the clue numbers in the spreadsheet cells.')
     parser.add_argument('--outer-border',action=ToggleAction,default=True,help='Determines whether to draw a border around the outside of the grid.')
+    parser.add_argument('--color-levels',type=int,default=2,help='(image input) The number of different levels of color to distinguish')
     parser.add_argument('--color-attribute',type=str,help='(HTML table input) The name of the attribute that determines whether the cell is light or dark.')
     parser.add_argument('--color-value-dark',type=str,help='(HTML table input) The value of the above attribute when the cell is dark.')
     args=parser.parse_args()

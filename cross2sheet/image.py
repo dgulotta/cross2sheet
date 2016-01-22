@@ -113,6 +113,8 @@ class ImageGrid:
 
     def _find_bars(self,coord):
         b0,b1=coord(0,1)
+        if len(self.breaks[b0])<=2:
+            return []
         span = max(b-a for a,b in self.breaks[b0])
         means = []
         for a,(c1,c2) in enumerate(self.breaks[b0][1:-1]):

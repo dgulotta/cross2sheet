@@ -18,7 +18,7 @@ class ImageGrid:
         _,con,_ = cv2.findContours(thr,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
         squares=[c for c in con if self._contour_is_square(c) and cv2.contourArea(c)>=16]
         if not squares:
-            return []
+            return ([],[])
         a=statistics.median(cv2.contourArea(c) for c in squares)
         p=statistics.median(cv2.arcLength(c,True) for c in squares)
         blanks=[c for c in con if abs(cv2.contourArea(c)-a)<.1*a and abs(cv2.arcLength(c,True)-p)<.05*p]

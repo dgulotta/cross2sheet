@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<style>
+table {
+	border-collapse: collapse;
+}
+td {
+	border: 1px solid black;
+	width: 2em;
+	height: 2em;
+}
+div.comment {
+	width: 0;
+	height: 0;
+	border-top: 5px solid black;
+	border-right: 5px solid black;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid transparent;
+	float: right;
+}
+</style>
+<style id="nobackstyle">
+td {
+	background-color: transparent !important;
+}
+.back {
+	display: none;
+}
+</style>
+<style id="backstyle">
+.noback {
+	display: none;
+}
+</style>
+<style id="barstyle">
+td.b {
+	border-bottom: 3px solid black;
+}
+
+td.l {
+	border-left: 3px solid black;
+}
+
+td.r {
+	border-right: 3px solid black;
+}
+td.t {
+	border-top: 3px solid black;
+}
+.nobar {
+	display: none;
+}
+</style>
+<style id="nobarstyle">
+.bar {
+	display: none;
+}
+</style>
+<style id="autonumberstyle">
+.auto {
+	display: none;
+}
+</style>
+<style id="textnumberstyle">
+.text {
+	display: none;
+}
+</style>
+<style id="numberstyle">
+span.n {
+	display: none;
+}
+</style>
+<style id="commentstyle">
+div.comment {
+	display: none;
+};
+</style>
+<script type="text/javascript">
+function registerCheck(checkid,styleid,checkedDisables)
+{
+	function checkEvent() {
+		document.getElementById(styleid).disabled=(document.getElementById(checkid).checked==Boolean(checkedDisables));
+	}
+	document.getElementById(checkid).addEventListener("change",checkEvent);
+	checkEvent();
+}
+
+function radioEvent()
+{
+	document.getElementById("autonumberstyle").disabled=document.getElementById("auto").checked;
+	document.getElementById("textnumberstyle").disabled=document.getElementById("text").checked;
+}
+
+window.onload = function() {
+	registerCheck("back","backstyle",false);
+	registerCheck("back","nobackstyle",true);
+	registerCheck("bar","barstyle",false);
+	registerCheck("bar","nobarstyle",true);
+	registerCheck("cells","numberstyle",true);
+	registerCheck("comments","commentstyle",true);
+	document.getElementById("auto").addEventListener("change",radioEvent);
+	document.getElementById("text").addEventListener("change",radioEvent);
+	document.getElementById("none").addEventListener("change",radioEvent);
+	radioEvent();
+}
+</script>
+</head>
+<body>
+{{table}}
+<form action="">
+<input type="checkbox" id="back">Detect cell colors</input><br/>
+<input type="checkbox" id="bar">Detect bars</input><br/>
+
+<input type="radio" id="auto" name="auto" value="auto">Automatically number cells based on bars and dark squares</input><br/>
+
+<input type="radio" id="text" name="auto" value="text">Sequentially number cells that appear to have text</input><br/>
+
+<input type="radio" id="none" name="auto" value="none">No cell numbering</input><br/>
+
+<input type="checkbox" id="cells">Show numbers in cells</input><br/>
+
+<input type="checkbox" id="comments">Show numbers in comments</input>
+</form>
+</body>
+</html>

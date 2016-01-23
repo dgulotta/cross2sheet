@@ -1,4 +1,5 @@
 from bs4 import Tag
+from cross2sheet.grid_features import Grid
 from cross2sheet.transforms import autonumber
 
 class Cell:
@@ -37,19 +38,17 @@ class CellText:
         return t
 
 class Table:
-    def __init__(self,img):
-        g=img.grid()
-        self.cells = [[Cell() for x in range(g.width)] for y in range(g.height)]
-        back=img.read_background()
-        bars=img.read_bars()
-        for r,c,e in back:
+    def __init__(self,data):
+        self.cells = [[Cell() for x in range(data.width)] for y in range(data.height)]
+        for r,c,e in data.back:
             self.cells[r][c].back=e.color
-        for r,c,e in bars:
+        for r,c,e in data.bars:
             self.cells[r][c].borders.extend(b.lower() for b in e.dirs)
-        for r,c,e in img.autonumber_if_text_found():
+        for r,c,e in data.text:
             self.cells[r][c].texts.append(CellText(['text'],e.text))
-        for s1,e1 in [('bar',bars),('nobar',[])]:
-            for s2,e2 in [('back',back),('noback',[])]:
+        g=Grid(data.height,data.width)
+        for s1,e1 in [('bar',data.bars),('nobar',[])]:
+            for s2,e2 in [('back',data.back),('noback',[])]:
                 g.features=e1+e2
                 for r,c,e in autonumber(g):
                     self.cells[r][c].texts.append(CellText(['auto',s1,s2],e.text))

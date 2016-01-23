@@ -110,18 +110,14 @@ window.onload = function() {
 <body>
 {{table}}
 <form action="">
-<input type="checkbox" id="back">Detect cell colors</input><br/>
-<input type="checkbox" id="bar">Detect bars</input><br/>
-
+<input type="checkbox" id="back" name="back">Detect cell colors</input><br/>
+<input type="checkbox" id="bar" name="bar">Detect bars</input><br/>
 <input type="radio" id="auto" name="auto" value="auto">Automatically number cells based on bars and dark squares</input><br/>
-
 <input type="radio" id="text" name="auto" value="text">Sequentially number cells that appear to have text</input><br/>
-
 <input type="radio" id="none" name="auto" value="none">No cell numbering</input><br/>
-
-<input type="checkbox" id="cells">Show numbers in cells</input><br/>
-
-<input type="checkbox" id="comments">Show numbers in comments</input>
+<input type="checkbox" id="cells" name="cells">Show numbers in cells</input><br/>
+<input type="checkbox" id="comments" name="comments">Show numbers in comments</input>
+<input type="hidden" name="data" value="{{data}}"/>
 </form>
 </body>
 </html>

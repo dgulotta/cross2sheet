@@ -23,6 +23,9 @@ python -m cross2sheet.main http://web.mit.edu/puzzle/www/2015/puzzle/rid_fill/ r
 ```
 To see the full list of options supported by the program, run `python -m cross2sheet.main -h`.
 
+The `cross2sheet.web` module provides a web interface.  At the moment, it doesn't provide
+any defense against the user uploading huge files, so it is mainly for testing purposes.
+
 There some example uses of the API in `cross2sheet/examples/examples.py`.
 
 Required software
@@ -32,6 +35,7 @@ work with other versions.  The following packages are used:
 * OpenCV 3, NumPy : image input
 * BeautifulSoup 4 : html input
 * OpenPyXL : xlsx output
+* Flask : web interface
 
 There is no PyPI package for OpenCV, so you will need to install it manually.
 

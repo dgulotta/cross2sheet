@@ -12,4 +12,7 @@ setup(
         'numpy',
         'openpyxl'
     ],
+    extras_require = {
+        'web': ['Flask']
+    },
 )

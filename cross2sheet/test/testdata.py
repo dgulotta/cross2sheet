@@ -513,4 +513,9 @@ class GoodTimesInTheCasino(ImageTest):
 '''
     cells_with_text='auto'
 
+class CurseOfTheAtlanteansTomb(ImageTest):
+    url='2015/puzzle/the_curse_of_the_atlanteans_tomb/images/curse-of-the-atlantean-tomb.png'
+    rows=19
+    cols=39
+
 del ImageTest

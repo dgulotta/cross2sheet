@@ -3,7 +3,7 @@ Converts grids to Excel format.
 """
 
 from openpyxl import Workbook
-from openpyxl.styles import Style, PatternFill
+from openpyxl.styles import PatternFill
 from openpyxl.styles.borders import Border, Side
 from openpyxl.styles.colors import Color
 from openpyxl.comments import Comment
@@ -18,16 +18,12 @@ class _CellStyle:
         self.color = None
         self.borders = set()
 
-    def style(self):
-        kwargs = {}
+    def set_style(self,cell):
         if self.color is not None:
-            kwargs['fill']=PatternFill(patternType='solid',fgColor=Color('FF%06x'%self.color))
+            cell.fill=PatternFill(patternType='solid',fgColor=Color('FF%06x'%self.color))
         if self.borders:
-            kwa = {}
-            for b in self.borders:
-                kwa[self.border_names[b]]=Side(style='thick')
-            kwargs['border']=Border(**kwa)
-        return Style(**kwargs)
+            kwa = { self.border_names[b] : Side(style='thick') for b in self.borders }
+            cell.border=Border(**kwa)
 
 def write_sheet(grid,ws,text_in_cells=True,text_in_comments=False,leave_white_blank=True):
     styles = collections.defaultdict(_CellStyle)
@@ -44,7 +40,7 @@ def write_sheet(grid,ws,text_in_cells=True,text_in_comments=False,leave_white_bl
         elif isinstance(elt,BorderElt):
             styles[r,c].borders.update(elt.dirs)
     for (r,c),s in styles.items():
-        ws.cell(row=r+1,column=c+1).style=s.style()
+        s.set_style(ws.cell(row=r+1,column=c+1))
     for d in ws.column_dimensions.values():
         d.width=3
     # Google Sheets seems to truncate sheets with no data at 10 columns, so

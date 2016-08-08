@@ -1,4 +1,4 @@
-cross2sheet
+cross2sheet [![Build Status](https://travis-ci.org/dgulotta/cross2sheet.svg?branch=master)](https://travis-ci.org/dgulotta/cross2sheet)
 ===========
 
 A program to convert crossword grids to spreadsheet format

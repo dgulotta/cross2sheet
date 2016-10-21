@@ -6,6 +6,8 @@ from cross2sheet.grid_features import *
 class ImageGrid:
 
     def __init__(self,data):
+        if not data:
+            raise ValueError('Image is empty')
         arr=numpy.asarray(bytearray(data),dtype=numpy.uint8)
         self.img=cv2.imdecode(arr,cv2.IMREAD_COLOR)
         if self.img is None:
@@ -28,7 +30,10 @@ class ImageGrid:
         return (self._squares_to_breaks(yc,dist),self._squares_to_breaks(xc,dist))
 
     def grid(self):
-        return Grid(len(self.breaks[0])-1,len(self.breaks[1])-1)
+        return Grid(*self.dimensions())
+
+    def dimensions(self):
+        return (len(self.breaks[0])-1,len(self.breaks[1])-1)
 
     def read_background(self,color_resolution=2):
         cells = []

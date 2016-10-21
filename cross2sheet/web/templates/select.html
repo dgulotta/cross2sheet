@@ -2,6 +2,9 @@
 <html>
 <body>
 <h1>Crossword grid parser</h1>
+{% if error_msg %}
+<p>Error: {{ error_msg }}</p>
+{% endif %}
 <h4>Upload an image file</h4>
 <form action="view" enctype="multipart/form-data" method="post">
 <input type="file" name="file"/><br/>

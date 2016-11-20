@@ -3,19 +3,12 @@ dist: trusty
 language: python
 python:
   - "3.4"
-virtualenv:
-  system_site_packages: true
 
 before_install:
-  - sudo add-apt-repository ppa:orangain/opencv -y
-  - sudo apt-get -qq update
-  - sudo apt-get install python3-opencv -y
-  - sudo ln /dev/null /dev/raw1394
-  - cp /usr/bin/python3 $VIRTUAL_ENV/bin/python3
-  - pip install --upgrade pip
+  - pip install -U pip
 
 install:
-  - python setup.py -q install
+  - pip install -Ue .[opencv]
 
 script:
   - python -m unittest -q cross2sheet.test.testdata

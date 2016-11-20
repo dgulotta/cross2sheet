@@ -13,6 +13,7 @@ setup(
         'openpyxl'
     ],
     extras_require = {
-        'web': ['Flask']
+        'web': ['Flask'],
+        'opencv' : ['opencv-python']
     },
 )

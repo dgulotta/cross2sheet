@@ -23,8 +23,7 @@ python -m cross2sheet.main http://web.mit.edu/puzzle/www/2015/puzzle/rid_fill/ r
 ```
 To see the full list of options supported by the program, run `python -m cross2sheet.main -h`.
 
-The `cross2sheet.web` module provides a web interface.  At the moment, it doesn't provide
-any defense against the user uploading huge files, so it is mainly for testing purposes.
+The `cross2sheet.web` module provides a web interface.
 
 There some example uses of the API in `cross2sheet/examples/examples.py`.
 
@@ -37,7 +36,11 @@ work with other versions.  The following packages are used:
 * OpenPyXL : xlsx output
 * Flask : web interface
 
-There is no PyPI package for OpenCV, so you will need to install it manually.
+The PyPI package for OpenCV seems not to work for everyone (at least it does
+not work on my Gentoo system), and moreover setuptools won't recognize if you
+have installed OpenCV some other way, so it is not listed as a required
+dependency.  You can try to install the package by running `pip install
+opencv-python`.
 
 The `tesseract` command line program can be used to read numbers in the grid, but in
 most cases it is better to have cross2sheet guess where the numbers go.

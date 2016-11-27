@@ -9,6 +9,16 @@ from flask import flash
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH']=0x1000000
 
+def check_urlopen():
+    try:
+        urlopen('http://www.example.com/')
+        return True
+    except URLError:
+        return False
+
+if 'URLOPEN_ENABLED' not in app.config:
+    app.config['URLOPEN_ENABLED']=check_urlopen()
+
 @app.route("/")
 def select():
     return render_template('select.html')

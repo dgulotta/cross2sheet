@@ -10,10 +10,12 @@
 <input type="file" name="file"/><br/>
 <input type="submit" value="Upload"/>
 </form>
+{% if config.URLOPEN_ENABLED %}
 <h4>Specify an image URL</h4>
 <form action="view" method="post">
 <input type="url" name="url"/><br/>
 <input type="submit" value="Submit URL"/>
 </form>
+{% endif %}
 </body>
 </html>

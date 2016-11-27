@@ -7,6 +7,7 @@ from openpyxl.styles import PatternFill
 from openpyxl.styles.borders import Border, Side
 from openpyxl.styles.colors import Color
 from openpyxl.comments import Comment
+from openpyxl.utils import get_column_letter
 import collections
 from cross2sheet.grid_features import *
 
@@ -41,8 +42,8 @@ def write_sheet(grid,ws,text_in_cells=True,text_in_comments=False,leave_white_bl
             styles[r,c].borders.update(elt.dirs)
     for (r,c),s in styles.items():
         s.set_style(ws.cell(row=r+1,column=c+1))
-    for d in ws.column_dimensions.values():
-        d.width=3
+    for c in range(grid.width):
+        ws.column_dimensions[get_column_letter(c+1)].width=3
     # Google Sheets seems to truncate sheets with no data at 10 columns, so
     # make sure the bottom right cell isn't empty
     bottom_right=ws.cell(row=grid.height,column=grid.width)

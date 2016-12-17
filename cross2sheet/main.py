@@ -75,6 +75,9 @@ def read_data(data,args):
     raise ReadFailed(msg)
 
 def process(grid,args):
+    if args.print_testdata:
+        from cross2sheet.test.test import print_tests
+        print_tests(grid)
     if args.autonumber:
         grid.features.extend(autonumber(grid))
     if args.outer_border:
@@ -120,6 +123,7 @@ if __name__=='__main__':
     parser.add_argument('--color-levels',type=int,default=2,help='(image input) The number of different levels of color to distinguish')
     parser.add_argument('--color-attribute',type=str,help='(HTML table input) The name of the attribute that determines whether the cell is light or dark.')
     parser.add_argument('--color-value-dark',type=str,help='(HTML table input) The value of the above attribute when the cell is dark.')
+    parser.add_argument('--print-testdata',action=ToggleAction,default=False,help='Print unit test data for this crossword.')
     args=parser.parse_args()
     data=read(args.input_file_or_url)
     try:

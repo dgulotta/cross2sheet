@@ -1,4 +1,5 @@
 import unittest
+from cross2sheet.grid_features import BackgroundElt, BorderElt, TextElt
 from cross2sheet.image import ImageGrid
 from cross2sheet.transforms import autonumber, outside_bars
 from urllib.request import urlopen
@@ -8,6 +9,8 @@ def grid_to_string(l):
     i = StringIO()
     oldr=0
     for r,_,e in l:
+        if not isinstance(e,BackgroundElt):
+            continue
         if r>oldr:
             oldr=r
             i.write('\n')
@@ -24,6 +27,8 @@ def bars_to_string(l):
     xmax=max(x for _,x,_ in l)
     grid=[[' ' for x in range(2*xmax+3)] for y in range(2*ymax+3)]
     for y,x,b in l:
+        if not isinstance(b,BorderElt):
+            continue
         for c in b.dirs:
             if c=='T':
                 grid[2*y][2*x]='+'
@@ -48,8 +53,27 @@ def labels_to_string(l):
     xmax=max(x for _,x,_ in l)
     grid=[[' ' for x in range(xmax+1)] for y in range(ymax+1)]
     for y,x,t in l:
-        grid[y][x]='*'
+        if isinstance(t,TextElt):
+            grid[y][x]='*'
     return '\n'.join(''.join(r) for r in grid)
+
+def print_tests(grid):
+    print('\trows={}'.format(grid.height))
+    print('\tcols={}'.format(grid.width))
+    if any(isinstance(e,BackgroundElt) and e.color!=0xffffff for r,c,e in grid.features):
+        print("\tfill='''")
+        print(grid_to_string(grid.features))
+        print("'''")
+    if any(isinstance(e,BorderElt) for r,c,e in grid.features):
+        feat=list(grid.features)
+        feat.extend(outside_bars(grid))
+        print("\tbars='''")
+        print(bars_to_string(feat))
+        print("'''")
+    if any(isinstance(e,TextElt) for r,c,e in grid.features):
+        print("\tcells_with_text='''")
+        print(labels_to_string(grid.features))
+        print("'''")
 
 class ImageTest(unittest.TestCase):
 

@@ -78,7 +78,10 @@ def print_tests(grid):
 class ImageTest(unittest.TestCase):
 
     def setUp(self):
-        req=urlopen('http://web.mit.edu/puzzle/www/'+self.url)
+        url=self.url
+        if url.startswith('20'):
+            url='http://web.mit.edu/puzzle/www/'+url
+        req=urlopen(url)
         data=req.read()
         req.close()
         self.img=ImageGrid(data)

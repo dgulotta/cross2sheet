@@ -518,4 +518,108 @@ class CurseOfTheAtlanteansTomb(ImageTest):
     rows=19
     cols=39
 
+class TwistsAndTurns(ImageTest):
+    url='2003/www.acme-corp.com/teamGuest/6/images/twists-and-turns.jpg'
+    rows=12
+    cols=12
+    bars='''
++-+-+-+-+-+-+-+-+-+-+-+-+
+|     |     |     |     |
++ +-+ + +-+ + +-+ + +-+ +
+|   | |   | | |   | |   |
++-+ + +-+ + + + +-+ + +-+
+|   | |   |   |   | |   |
++ +-+ + +-+-+-+-+ + +-+ +
+|   |   |   |   |   |   |
++-+ +-+-+ + + + +-+-+ +-+
+|   |     | | |     |   |
++ +-+ +-+-+ + +-+-+ +-+ +
+|     |     |     |     |
++-+-+-+ +-+-+-+-+ +-+-+-+
+|     |     |     |     |
++ +-+ +-+-+ + +-+-+ +-+ +
+|   |     | | |     |   |
++-+ +-+-+ + + + +-+-+ +-+
+|   |   |   |   |   |   |
++ +-+ + +-+-+-+-+ + +-+ +
+|   | |   |   |   | |   |
++-+ + +-+ + + + +-+ + +-+
+|   | |   | | |   | |   |
++ +-+ + +-+ + +-+ + +-+ +
+|     |     |     |     |
++-+-+-+-+-+-+-+-+-+-+-+-+
+'''
+
+class ThatsRight(ImageTest):
+    url='2003/www.acme-corp.com/teamGuest/7/images/thats-right.jpg'
+    rows=12
+    cols=12
+    cells_with_text='''
+* ** * *  **
+ * *        
+    *    ** 
+  *         
+*    * *  * 
+    *       
+  ***       
+ *       ***
+  *     *   
+ **    *    
+   * **   * 
+**  * * * * 
+'''
+
+class PipeDream(ImageTest):
+    url='2006/puzzles/epcot_center/pipe_dream/pipedreamgrid.png'
+    rows=9
+    cols=9
+    fill='''
+.........
+...#.....
+......#..
+..#.....#
+....#....
+#.....#..
+..#......
+.....#...
+.........
+'''
+    cells_with_text='''
+** * ** *
+  * *   *
+     * * 
+*  **    
+* *   * *
+  *      
+*        
+* *   * *
+*    ** *
+'''
+
+class WhenNotInRome(ImageTest):
+    url='2007/puzzles/when_not_in_rome/grid.png'
+    rows=13
+    cols=13
+    fill='''
+.......#.....
+.#.#.#.#.#.#.
+.....#.......
+.#.#.#.#.#.#.
+........#....
+.###.#.#.#.#.
+#.....#.....#
+.#.#.#.#.###.
+....#........
+.#.#.#.#.#.#.
+.......#.....
+.#.#.#.#.#.#.
+.....#.......
+'''
+
+class HowFar(ImageTest):
+    url='http://huntception.com/puzzle/how_far/images/howfargrid.png'
+    rows=17
+    cols=17
+    cells_with_text='auto'
+
 del ImageTest

@@ -1,14 +1,14 @@
 import unittest
-from cross2sheet.grid_features import BackgroundElt, BorderElt, TextElt
+from cross2sheet.grid_features import Grid, BackgroundElt, BorderElt, TextElt
 from cross2sheet.image import ImageGrid
 from cross2sheet.transforms import autonumber, outside_bars
 from urllib.request import urlopen
 from io import StringIO
 
-def grid_to_string(l):
+def grid_to_string(g):
     i = StringIO()
     oldr=0
-    for r,_,e in l:
+    for r,_,e in g.features:
         if not isinstance(e,BackgroundElt):
             continue
         if r>oldr:
@@ -22,11 +22,11 @@ def grid_to_string(l):
             i.write('O')
     return i.getvalue()
 
-def bars_to_string(l):
-    ymax=max(y for y,_,_ in l)
-    xmax=max(x for _,x,_ in l)
+def bars_to_string(g):
+    ymax=g.height-1
+    xmax=g.width-1
     grid=[[' ' for x in range(2*xmax+3)] for y in range(2*ymax+3)]
-    for y,x,b in l:
+    for y,x,b in g.features:
         if not isinstance(b,BorderElt):
             continue
         for c in b.dirs:
@@ -48,11 +48,9 @@ def bars_to_string(l):
                 grid[2*y+2][2*x+2]='+'
     return '\n'.join(''.join(r) for r in grid)
 
-def labels_to_string(l):
-    ymax=max(y for y,_,_ in l)
-    xmax=max(x for _,x,_ in l)
-    grid=[[' ' for x in range(xmax+1)] for y in range(ymax+1)]
-    for y,x,t in l:
+def labels_to_string(g):
+    grid=[['.' for x in range(g.width)] for y in range(g.height)]
+    for y,x,t in g.features:
         if isinstance(t,TextElt):
             grid[y][x]='*'
     return '\n'.join(''.join(r) for r in grid)
@@ -62,17 +60,18 @@ def print_tests(grid):
     print('\tcols={}'.format(grid.width))
     if any(isinstance(e,BackgroundElt) and e.color!=0xffffff for r,c,e in grid.features):
         print("\tfill='''")
-        print(grid_to_string(grid.features))
+        print(grid_to_string(grid))
         print("'''")
     if any(isinstance(e,BorderElt) for r,c,e in grid.features):
-        feat=list(grid.features)
-        feat.extend(outside_bars(grid))
+        bordered=Grid(grid.height,grid.width)
+        bordered.features.extend(grid.features)
+        bordered.features.extend(outside_bars(grid))
         print("\tbars='''")
-        print(bars_to_string(feat))
+        print(bars_to_string(bordered))
         print("'''")
     if any(isinstance(e,TextElt) for r,c,e in grid.features):
         print("\tcells_with_text='''")
-        print(labels_to_string(grid.features))
+        print(labels_to_string(grid))
         print("'''")
 
 class ImageTest(unittest.TestCase):
@@ -93,14 +92,16 @@ class ImageTest(unittest.TestCase):
         self.assertEqual(expected,detected,'wrong dimensions')
         if hasattr(self,'fill'):
             with self.subTest('fill'):
-                f=grid_to_string(self.img.read_background())
+                grid=self.img.grid()
+                grid.features.extend(self.img.read_background())
+                f=grid_to_string(grid)
                 self.assertEqual(self.fill.strip(),f.strip())
         if hasattr(self,'bars'):
             with self.subTest('bars'):
                 grid=self.img.grid()
                 grid.features.extend(self.img.read_bars())
                 grid.features.extend(outside_bars(grid))
-                b=bars_to_string(grid.features)
+                b=bars_to_string(grid)
                 self.assertEqual(self.bars.strip(),b.strip())
         if hasattr(self,'cells_with_text'):
             with self.subTest('cells_with_text'):
@@ -108,6 +109,9 @@ class ImageTest(unittest.TestCase):
                     grid=self.img.grid()
                     grid.features.extend(self.img.read_background())
                     grid.features.extend(self.img.read_bars())
-                    self.cells_with_text=labels_to_string(autonumber(grid))
-                t=labels_to_string(self.img.autonumber_if_text_found())
+                    grid.features.extend(autonumber(grid))
+                    self.cells_with_text=labels_to_string(grid)
+                grid=self.img.grid()
+                grid.features.extend(self.img.autonumber_if_text_found())
+                t=labels_to_string(grid)
                 self.assertEqual(self.cells_with_text.strip(),t.strip())

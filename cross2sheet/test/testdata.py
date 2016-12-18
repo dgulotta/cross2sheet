@@ -71,6 +71,8 @@ class CrossPollinationA(ImageTest):
 ...#....#......
 ...#....#......
 '''
+    #broken
+    #cells_with_text='auto'
 
 class CrossPollinationB(ImageTest):
     url='2014/puzzle/cross_pollination/B.png'
@@ -93,6 +95,8 @@ class CrossPollinationB(ImageTest):
 ...#.....#.....
 ...#.....#.....
 '''
+    #broken
+    #cells_with_text='auto'
 
 class SamsYourUncle(ImageTest):
     url='2013/coinheist.com/feynman/sams_your_uncle/image00.png'
@@ -123,11 +127,59 @@ class SamsYourUncle(ImageTest):
 *...*...*.....*..*..*...
 ........................
 '''
+    #broken
+    #bars
 
 class FixesTheWavyZigzagJumble(ImageTest):
     url='2013/coinheist.com/rubik/fixes_the_wavy_zigzag_jumble/image00.png'
     rows=21
     cols=21
+    bars='''
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|           |         | |           |     |
++ +-+   +-+ + +-+ + + + + +-+ +-+ +-+   +-+
+| |             | | | |           | |     |
++ +-+   +-+   +-+ + + +   +-+ +-+ + +   +-+
+|         |         |           |         |
++ +-+ + +-+ + +-+ +-+     +-+-+ + + +   +-+
+| | | |     | |             | | | | |     |
++ + +-+-+-+ +-+-+ +-+ +-+-+-+ + +-+ +-+-+-+
+|         | | |     | |           |       |
++     +-+ + + +-+   + +-+ +-+   +-+-+   +-+
+|           |         |         | |       |
++ + + +-+   + +-+-+ + +-+ +-+ +-+ +-+   +-+
+| | | |         | | | |       |           |
++-+ + +-+ +-+ +-+ + + +-+ +-+ +-+ +-+ +-+-+
+|       | |           | |       | | |     |
++   +-+ +-+-+ +-+ + +-+ + +-+ + + + +   +-+
+|     | |         | |       | | |         |
++ + +-+ + + +-+-+ +-+ + + +-+ + +-+ +   +-+
+| | |     | |       | | | |         |     |
++ +-+-+ + + + +-+-+ + + + +-+   +-+ +-+ +-+
+|       | |                     | |       |
++-+ +-+ +-+   +-+ + + + +-+-+ + + + +-+-+ +
+|     |         | | | |       | |     | | |
++-+   + +-+ + +-+ + + +-+ +-+-+ + + +-+ + +
+|         | | |       | |         | |     |
++-+   + + + + +-+ + +-+ + +-+ +-+-+ +-+   +
+|     | | |       | |           | |       |
++-+-+ +-+ +-+ +-+ +-+ + + +-+ +-+ +-+ + +-+
+|           |       | | | |         | | | |
++-+   +-+ +-+ +-+ +-+ + +-+-+ +   +-+ + + +
+|       | |         |         |           |
++-+   +-+-+   +-+ +-+ +   +-+ + + +-+     +
+|       |           | |     | | |         |
++-+-+-+ +-+ + +-+-+-+ +-+ +-+-+ +-+-+-+ + +
+|     | | | | |             | |     | | | |
++-+   + + + +-+-+     +-+ +-+ + +-+ + +-+ +
+|         |           |         |         |
++-+   + + +-+ +-+   + + + +-+   +-+   +-+ +
+|     | |           | | | |             | |
++-+   +-+ +-+ +-+ + + + + +-+ + +-+   +-+ +
+|     |           | |         |           |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+'''
+    cells_with_text='auto'
 
 class EvilInfluence(ImageTest):
     url='2012/puzzles/mayan_fair_lady/evil_influence/1s.png'
@@ -162,6 +214,7 @@ class EvilInfluence(ImageTest):
 |       |               | |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+
 '''
+    cells_with_text='auto'
 
 class Laureate(ImageTest):
     url='2011/puzzles/civilization/laureate/assets/grid.png'
@@ -217,6 +270,87 @@ class WorldsTallestCryptic(ImageTest):
     url='2008/world_s_tallest_cryptic/images/worldstallest.jpg'
     rows=38
     cols=13
+    bars='''
++-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     | |       |     | | |
++ +-+-+ +-+-+ + +   +-+ + +
+| |         | | |         |
++ + +-+ +-+ + + +   +-+ + +
+|           |         | | |
++ + +-+ +-+ + + + +-+-+ + +
+| | |     | | | | | |     |
++ + + +-+ + + + +-+ +-+ + +
+|                   | | | |
++ + + +-+ + + + +-+ + + + +
+| | |     | | |           |
++ + + +-+ + + +-+-+     + +
+|       |       |       | |
++-+   +-+ + +-+-+ +-+ +-+ +
+|     | | |       | |     |
++ + +-+ + +-+ +-+ + +-+ +-+
+| | |                     |
++ +-+   +-+-+ +-+   +-+ + +
+|                     | | |
++ +-+ +-+-+ + +-+     + + +
+| | |       | |           |
++ + + +-+ + + + +     + + +
+|       | |     |     | | |
++ +   +-+ + + + +-+ + + + +
+| |       | | |     |     |
++ + +-+ +-+ + +-+ +-+ + + +
+|     | |       |     | | |
++ +-+-+ +-+-+ + +   +-+ + +
+| |         | | |         |
++ + +-+ +-+ + + +   +-+ + +
+|           |         | | |
++ + +-+ +-+ + + + +-+-+ + +
+| | |     | | | | | |     |
++ + + +-+ + + + +-+ +-+ + +
+|                   | | | |
++ + + +-+ + + + +-+ + + + +
+| | |     | | |           |
++ + + +-+ + + +-+-+     + +
+|       |       |       | |
++-+   +-+ + +-+-+ +-+ +-+ +
+|     | | |       | |     |
++ + +-+ + +-+ +-+ + +-+ +-+
+| | |                     |
++ +-+   +-+-+ +-+   +-+ + +
+|                     | | |
++ +-+ +-+-+ + +-+     + + +
+| | |       | |           |
++ + + +-+ + + + +     + + +
+|       | |     |     | | |
++ +   +-+ + + + +-+ + + + +
+| |       | | |     |     |
++ + +-+ +-+ + +-+ +-+ + + +
+|     | |       |     | | |
++ +-+-+ +-+-+ + +   +-+ + +
+| |         | | |         |
++ + +-+ +-+ + + +   +-+ + +
+|           |         | | |
++ + +-+ +-+ + + + +-+-+ + +
+| | |     | | | | | |     |
++ + + +-+ + + + +-+ +-+ + +
+|                   | | | |
++ + + +-+ + + + +-+ + + + +
+| | |     | | |           |
++ + + +-+ + + +-+-+     + +
+|       |       |       | |
++-+   +-+ + +-+-+ +-+ +-+ +
+|       | |       |       |
++   +-+ + +-+     + +-+ +-+
+|       |                 |
++ +-+   +-+             + +
+| |                     | |
++ +-+   +-+   + +-+     + +
+|             |           |
++ +-+   +-+ +-+ +-+     + +
+| |                     | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+
+'''
+    #broken
+    #cells_with_text
 
 class GridWithAHoleInTheMiddle(ImageTest):
     url='2006/puzzles/cambridge/grid_with_a_hole_in_the_middle/grid.png'
@@ -359,6 +493,23 @@ class PacificOvertones(ImageTest):
 ....#.....#....
 ....#....OO....
 '''
+    cells_with_text='''
+****..****.****
+*....*.....*...
+*....*.....*...
+...**.....*....
+***.*...**...**
+*..*....*...*..
+*......*...*...
+...*.**...*....
+***..*....*.***
+*...*....*.....
+*..*...**...*..
+..*....*...*...
+**...**....****
+*....*.....*...
+*....*.....*...
+'''
 
 class OneMoreTry(ImageTest):
     url='2011/puzzles/mega_man/one_more_try/assets/grid.png'
@@ -391,6 +542,8 @@ class OneMoreTry(ImageTest):
 ....#.........#........##
 ....##...#....##......###
 '''
+    #broken
+    #cells_with_text='auto'
 
 class  DualSingularities(ImageTest):
     url='2009/puzzles/dual_singularities/PUZZLE/grid3.png'
@@ -473,6 +626,9 @@ class DealingWithChange(ImageTest):
 #.....#.....#......
 #.....#....###.....
 '''
+    #broken
+    #detects many extraneous vertical bars
+    #cells_with_text='auto' works if bar detection disabled
 
 class QED(ImageTest):
     url='2012/puzzles/ben_bitdiddle/qed/1.png'
@@ -505,6 +661,15 @@ O...O#.
 O...O..
 ..O....
 '''
+    cells_with_text='''
+.***..*
+*.....*
+*..**.*
+.**...*
+..*....
+.......
+***..**
+'''
 
 class RumpledManWithABowlCut(ImageTest):
     url='2009/puzzles/the_rumpled_man_with_a_bowl_cut/PUZZLE/600px-acrostic.png'
@@ -514,6 +679,11 @@ class RumpledManWithABowlCut(ImageTest):
 ..#..#...#........
 ..#....#...#.....#
 .........#.#.....# 
+'''
+    cells_with_text='''
+**.**.***.********
+**.****.***.*****.
+*********.*.*****.
 '''
 
 class GoodTimesInTheCasino(ImageTest):
@@ -542,6 +712,9 @@ class CurseOfTheAtlanteansTomb(ImageTest):
     url='2015/puzzle/the_curse_of_the_atlanteans_tomb/images/curse-of-the-atlantean-tomb.png'
     rows=19
     cols=39
+    #broken
+    #fill
+    #cells_with_text='auto'
 
 class TwistsAndTurns(ImageTest):
     url='2003/www.acme-corp.com/teamGuest/6/images/twists-and-turns.jpg'
@@ -646,5 +819,7 @@ class HowFar(ImageTest):
     rows=17
     cols=17
     cells_with_text='auto'
+    #broken
+    #dark squares are considered as light squares with bars on all sides
 
 del ImageTest

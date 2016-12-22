@@ -10,7 +10,8 @@ setup(
     install_requires=[
         'beautifulsoup4',
         'numpy',
-        'openpyxl'
+        'openpyxl',
+        'Wand',
     ],
     extras_require = {
         'web': ['Flask'],

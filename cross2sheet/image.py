@@ -8,12 +8,26 @@ class ImageGrid:
     def __init__(self,data):
         if not data:
             raise ValueError('Image is empty')
-        arr=numpy.asarray(bytearray(data),dtype=numpy.uint8)
-        self.img=cv2.imdecode(arr,cv2.IMREAD_COLOR)
-        if self.img is None:
-            raise ValueError('Image data not recognized')
+        self.img=self.read_img(data)
         self.gray=cv2.cvtColor(self.img,cv2.COLOR_BGR2GRAY)
         self.breaks=self.detect_breaks()
+
+    @staticmethod
+    def read_img(data):
+        img=ImageGrid.decode_img(data)
+        if img is not None:
+            return img
+        from wand.image import Image
+        img=ImageGrid.decode_img(Image(blob=data,resolution=200).make_blob('png'))
+        if img is not None:
+            return img
+        raise ValueError('Image data not recognized')
+
+
+    @staticmethod
+    def decode_img(data):
+        arr=numpy.asarray(bytearray(data),dtype=numpy.uint8)
+        return cv2.imdecode(arr,cv2.IMREAD_COLOR)
 
     def detect_breaks(self):
         _,thr = cv2.threshold(self.gray,214,255,cv2.THRESH_BINARY)

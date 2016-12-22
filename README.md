@@ -35,12 +35,19 @@ work with other versions.  The following packages are used:
 * BeautifulSoup 4 : html input
 * OpenPyXL : xlsx output
 * Flask : web interface
+* Wand : support for some image formats not recognized by OpenCV
 
 The PyPI package for OpenCV seems not to work for everyone (at least it does
 not work on my Gentoo system), and moreover setuptools won't recognize if you
 have installed OpenCV some other way, so it is not listed as a required
-dependency.  You can try to install the package by running `pip install
-opencv-python`.
+dependency.  To install all dependencies including OpenCV, run
+```
+pip install -Ue .[opencv]
+```
+To install everything except OpenCV, run
+```
+pip install -Ue .
+```
 
 The `tesseract` command line program can be used to read numbers in the grid, but in
 most cases it is better to have cross2sheet guess where the numbers go.

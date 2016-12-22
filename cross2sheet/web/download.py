@@ -11,10 +11,11 @@ def form_data_to_excel(form):
         g.features.extend(td.back)
     if 'bar' in form:
         g.features.extend(td.bars)
+    if form['auto']=='text':
+        g.features.extend(td.text)
+    g.validate()
     if form['auto']=='auto':
         g.features.extend(autonumber(g))
-    elif form['auto']=='text':
-        g.features.extend(td.text)
     g.features.extend(outside_bars(g))
     i=BytesIO()
     to_openpyxl(g,text_in_cells='cells' in form,text_in_comments='comments' in form).save(i)

@@ -18,9 +18,13 @@ class ImageGrid:
         if img is not None:
             return img
         from wand.image import Image
-        img=ImageGrid.decode_img(Image(blob=data,resolution=200).make_blob('png'))
-        if img is not None:
-            return img
+        from wand.exceptions import WandError
+        try:
+            img=ImageGrid.decode_img(Image(blob=data,resolution=200).make_blob('png'))
+            if img is not None:
+                return img
+        except WandError:
+            pass
         raise ValueError('Image data not recognized')
 
 

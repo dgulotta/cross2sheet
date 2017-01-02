@@ -27,7 +27,6 @@ class ImageGrid:
             pass
         raise ValueError('Image data not recognized')
 
-
     @staticmethod
     def decode_img(data):
         arr=numpy.asarray(bytearray(data),dtype=numpy.uint8)

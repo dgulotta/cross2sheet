@@ -5,6 +5,13 @@
 {% if error_msg %}
 <p>Error: {{ error_msg }}</p>
 {% endif %}
+<p>This program takes an image of a crossword grid and converts it into
+a spreadsheet that can be uploaded to Google Sheets.  Right click on the
+crossword grid, select, "Save Image As", and then upload the image here.</p>
+<p>Q: What if the grid isn't an image file?</p>
+<p>Take a screenshot.  I recommend cropping the screenshot to include just the crossword, but the program can sometimes handle screenshots that are not
+cropped.  If the crossword is a PDF file, you can also
+try uploading that.</p>
 <h4>Upload an image file</h4>
 <form action="view" enctype="multipart/form-data" method="post">
 <input type="file" name="file"/><br/>

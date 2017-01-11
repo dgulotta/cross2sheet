@@ -56,21 +56,21 @@ def labels_to_string(g):
     return '\n'.join(''.join(r) for r in grid)
 
 def print_tests(grid):
-    print('\trows={}'.format(grid.height))
-    print('\tcols={}'.format(grid.width))
+    print('    rows={}'.format(grid.height))
+    print('    cols={}'.format(grid.width))
     if any(isinstance(e,BackgroundElt) and e.color!=0xffffff for r,c,e in grid.features):
-        print("\tfill='''")
+        print("    fill='''")
         print(grid_to_string(grid))
         print("'''")
     if any(isinstance(e,BorderElt) for r,c,e in grid.features):
         bordered=Grid(grid.height,grid.width)
         bordered.features.extend(grid.features)
         bordered.features.extend(outside_bars(grid))
-        print("\tbars='''")
+        print("    bars='''")
         print(bars_to_string(bordered))
         print("'''")
     if any(isinstance(e,TextElt) for r,c,e in grid.features):
-        print("\tcells_with_text='''")
+        print("    cells_with_text='''")
         print(labels_to_string(grid))
         print("'''")
 

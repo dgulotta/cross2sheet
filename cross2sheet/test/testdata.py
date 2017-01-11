@@ -72,8 +72,7 @@ class CrossPollinationA(ImageTest):
 ...#....#......
 ...#....#......
 '''
-    #broken
-    #cells_with_text='auto'
+    cells_with_text='auto'
 
 class CrossPollinationB(ImageTest):
     url='2014/puzzle/cross_pollination/B.png'
@@ -128,8 +127,55 @@ class SamsYourUncle(ImageTest):
 *...*...*.....*..*..*...
 ........................
 '''
-    #broken
-    #bars
+    bars='''
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                               |
++ +-+ +-+   +-+     + + + +     +   +-+ + +     +
+|       |     |     | | | |     |       | |     |
++ +-+   +   + +     + + + + + + +   +-+ + +   + +
+|           |           | | | |         |     | |
++ + + +   +-+ + +     + + + + +   + +-+-+ +-+ + +
+| | | |       | |     | | |       |             |
++ + +-+ +     + +-+ +-+ + +-+ + +-+-+   +-+ +-+ +
+|     | |     |           | | | |       |       |
++     +-+   + + +-+-+   +-+ + +-+   +   +   +-+ +
+|           | |         |           |           |
++ +-+ +-+   + + +-+ + +-+-+   +-+   + +-+ +-+   +
+|       |           | |       | |     |         |
++     +-+-+ + +-+-+ + + + + + + + +-+ + +       +
+|           |           | | |     |     |       |
++   +-+   +-+-+   +     + + +-+   +     +-+     +
+|           |     |                             |
++   +-+ + +-+-+   + +-+-+-+-+   +-+ +-+ +-+ +-+ +
+|       |           |       |     | | |         |
++ +-+   + +-+-+-+-+ +       +     + + +-+-+-+-+ +
+|           |       |       |                   |
++ +-+ +-+   + + +-+ +       + +-+ +   +-+-+ +-+ +
+|       |     |     |       |     |     |       |
++ +-+ +-+-+ + + +-+ +       + +-+ + +   +-+ +-+ +
+|           |       |       |     | |           |
++ +-+-+-+-+ + +     +       + +-+-+-+-+ +   +-+ +
+|         | | |     |       |           |       |
++ +-+ +-+ +-+ +-+   +-+-+-+-+     +-+-+ + +-+   +
+|                                   |           |
++     +-+     +   +-+ + +   +-+   +-+-+         +
+|       |     |     | | |           |           |
++       + + +-+ +-+ + + + + + +-+-+ + +-+-+     +
+|         |     |         | |           |       |
++   +-+ +-+ +   +-+   +-+-+ + +-+ + +   +-+ +-+ +
+|           |           |         | |           |
++ +-+   +-+ +   +-+ + +-+   +-+-+ + +   +-+     +
+|       |       | | | |           |     | |     |
++ +-+ +-+   +-+-+ + +-+ + +-+ +-+ +     + +-+ + +
+|             |       | | |     | |       | | | |
++ + +-+ + +-+ + + + + + + +     + + +-+   + + + +
+| |     |       | | | | |           |           |
++ +   + + +-+   + + + + + + +     + +   +   +-+ +
+|     | |       |     | | | |     |     |       |
++     + + +-+   +     + + + +     +-+   +-+ +-+ +
+|                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+'''
 
 class FixesTheWavyZigzagJumble(ImageTest):
     url='2013/coinheist.com/rubik/fixes_the_wavy_zigzag_jumble/image00.png'
@@ -350,8 +396,46 @@ class WorldsTallestCryptic(ImageTest):
 | |                     | |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+
 '''
-    #broken
-    #cells_with_text
+    cells_with_text='''
+**..**..*.*..
+.*......*....
+*.....*..*...
+..**....*.*..
+*............
+..*....*.....
+*...*.*.**.*.
+*.*..*....*.*
+.**.*........
+*..*.........
+..*....*.....
+*....*..*....
+.**.*..*.**..
+**..**..*.*..
+.*......*....
+*.....*..*...
+..**....*.*..
+*............
+..*....*.....
+*...*.*.**.*.
+*.*..*....*.*
+.**.*........
+*..*.........
+..*....*.....
+*....*..*....
+.**.*..*.**..
+**..**..*.*..
+.*......*....
+*.....*..*...
+..**....*.*..
+*............
+..*....*.....
+*...*.*.**.*.
+*.*..*...**.*
+**..*........
+.*......*....
+*.....**.....
+****.*.*.****
+'''
 
 class GridWithAHoleInTheMiddle(ImageTest):
     url='2006/puzzles/cambridge/grid_with_a_hole_in_the_middle/grid.png'
@@ -543,8 +627,7 @@ class OneMoreTry(ImageTest):
 ....#.........#........##
 ....##...#....##......###
 '''
-    #broken
-    #cells_with_text='auto'
+    cells_with_text='auto'
 
 class  DualSingularities(ImageTest):
     url='2009/puzzles/dual_singularities/PUZZLE/grid3.png'
@@ -854,10 +937,9 @@ class ManInTheMoon(ImageTest):
 |           |           |
 +-+-+-+-+-+-+-+-+-+-+-+-+
 '''
-    #broken
-    #cells_with_text='auto'
+    cells_with_text='auto'
 
-class CrossedSwords:
+class CrossedSwords(ImageTest):
     url='2010/puzzles/1752/crossed_swords/crossed_swords.gif'
     rows=15
     cols=15
@@ -894,22 +976,21 @@ class CrossedSwords:
 |       |             |       |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 '''
+    cells_with_text='auto'
     #broken
     #highlighted squares on diagonal
-    #cells_with_text='auto'
 
-@unittest.skip('dimensions not detected correctly')
-class IndescribableAmorphousCryptic:
+class IndescribableAmorphousCryptic(ImageTest):
     url='http://huntception.com/puzzle/the_indescribable_amorphous_cryptic/images/puzzle.pdf'
     rows=13
     cols=13
     cells_with_text='auto'
 
-@unittest.skip('dimensions not detected correctly')
-class TheCapriciousType:
+class TheCapriciousType(ImageTest):
     url='http://web.mit.edu/puzzle/www/2010/puzzles/2000/the_capricious_type/the_capricious_type.gif'
     rows=12
     cols=12
-    cells_with_text='auto'
+    #broken
+    #cells_with_text='auto'
 
 del ImageTest

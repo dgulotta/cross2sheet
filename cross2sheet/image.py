@@ -42,8 +42,14 @@ class ImageGrid:
         p=statistics.median(cv2.arcLength(c,True) for c in squares)
         blanks=[c for c in con if abs(cv2.contourArea(c)-a)<.1*a and abs(cv2.arcLength(c,True)-p)<.05*p]
         dist=int(p/8)
-        yc = sorted({c[0,1] for s in blanks for c in s})
-        xc = sorted({c[0,0] for s in blanks for c in s})
+        xc = []
+        yc = []
+        for c in blanks:
+            x,y,w,h=cv2.boundingRect(c)
+            xc.extend((x,x+w))
+            yc.extend((y,y+h))
+        xc.sort()
+        yc.sort()
         return (self._squares_to_breaks(yc,dist),self._squares_to_breaks(xc,dist))
 
     def grid(self):
@@ -137,7 +143,7 @@ class ImageGrid:
         b0,b1=coord(0,1)
         if len(self.breaks[b0])<=2:
             return []
-        span = max(b-a for a,b in self.breaks[b0])
+        span = max(b-a+1 for a,b in self.breaks[b0])
         means = []
         for a,(c1,c2) in enumerate(self.breaks[b0][1:-1]):
             dy=(span-c2+c1)//2

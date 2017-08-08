@@ -9,6 +9,8 @@ before_install:
 
 install:
   - pip install -Ue .[opencv]
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install ghostscript
 
 script:
   - python -m unittest -q cross2sheet.test.testdata

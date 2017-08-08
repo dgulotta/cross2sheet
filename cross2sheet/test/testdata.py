@@ -899,7 +899,7 @@ class WhenNotInRome(ImageTest):
 '''
 
 class HowFar(ImageTest):
-    url='http://huntception.com/puzzle/how_far/images/howfargrid.png'
+    url='2016/puzzle/how_far/images/howfargrid.png'
     rows=17
     cols=17
     cells_with_text='auto'
@@ -907,7 +907,7 @@ class HowFar(ImageTest):
     #dark squares are considered as light squares with bars on all sides
 
 class ManInTheMoon(ImageTest):
-    url='http://huntception.com/puzzle/the_man_in_the_moon/images/puzzle.pdf'
+    url='2016/puzzle/the_man_in_the_moon/images/puzzle.pdf'
     rows=12
     cols=12
     bars='''
@@ -982,17 +982,72 @@ class CrossedSwords(ImageTest):
     #highlighted squares on diagonal
 
 class IndescribableAmorphousCryptic(ImageTest):
-    url='http://huntception.com/puzzle/the_indescribable_amorphous_cryptic/images/puzzle.pdf'
+    url='2016/puzzle/the_indescribable_amorphous_cryptic/images/puzzle.pdf'
     rows=13
     cols=13
+    bars='''
++-+-+-+-+-+-+-+-+-+-+-+-+-+
+|           |             |
++     +-+ +-+-+ +-+ +-+ + +
+|       | |         | | | |
++ + + +-+ + +-+ +-+ + + + +
+| | |             |       |
++ + + +-+ + +-+ +-+   + + +
+|         |           | | |
++-+ +-+ + + +-+ +-+   + + +
+| | | | | |               |
++ + + + + + + +-+-+       +
+|           | |           |
++ +-+ +     + +-+   + +-+ +
+|     |             |     |
++ +-+ +   +-+ +     + +-+ +
+|           | |           |
++       +-+-+ + + + + + + +
+|               | | | | | |
++ + +   +-+ +-+ + + +-+ +-+
+| | |           |         |
++ + +   +-+ +-+ + +-+ + + +
+|       |             | | |
++ + + + +-+ +-+ + +-+ + + +
+| | | |         | |       |
++ + +-+ +-+ +-+-+ +-+     +
+|             |           |
++-+-+-+-+-+-+-+-+-+-+-+-+-+
+'''
     cells_with_text='auto'
 
 class TheCapriciousType(ImageTest):
     url='2010/puzzles/2000/the_capricious_type/the_capricious_type.gif'
     rows=12
     cols=12
-    #broken
-    #cells_with_text='auto'
+    bars='''
++-+-+-+-+-+-+-+-+-+-+-+-+
+|           |           |
++ +-+     +-+ +-+   +-+ +
+|         |           | |
++ + +     +     +   +-+ +
+| | |           |       |
++ + +       +   + +-+   +
+|           |     |     |
++ +     +-+ + +-+ +     +
+| |       | |           |
++ +-+ +-+ + +   +-+     +
+|     |                 |
++-+   +   +     +-+ +-+-+
+|         |     |       |
++       +-+ +-+-+ +-+-+ +
+|       | |     |       |
++ + +-+ + +-+ +-+ +-+   +
+| | | |           |     |
++ + + +-+     +-+ +     +
+|             | |       |
++ +-+ +-+ +   + +-+ + + +
+|         |         | | |
++ +-+ +-+ +-+   +-+ +-+ +
+|           |           |
++-+-+-+-+-+-+-+-+-+-+-+-+
+'''
+    cells_with_text='auto'
 
 @unittest.skip('dimensions not detected correctly')
 class CrossExamination(ImageTest):
@@ -1193,5 +1248,47 @@ O...........O
 .............
 *............
 '''
+
+class LeadWithHydrogen(ImageTest):
+    url='2017/assets/lead_with_hydrogen/puzzle.png'
+    rows=11
+    cols=11
+    fill='''
+.....#....#
+.#.#.#.##.#
+.....#.....
+.#......#.#
+...........
+....#.#....
+...........
+#.#......#.
+.....#.....
+#.##.#.#.#.
+#....#.....
+'''
+    cells_with_text='auto'
+
+class CrimesAgainstCruciverbalism(ImageTest):
+    url='2016/puzzle/crimes_against_cruciverbalism/images/puzzle.pdf'
+    rows=15
+    cols=15
+    fill='''
+....#.....#....
+....#.....#....
+....#.....#....
+....#....#.....
+...#....#...###
+.......#...#...
+##...##...#....
+...............
+....#...##...##
+...#...#.......
+###...#....#...
+.....#....#....
+....#.....#....
+....#.....#....
+....#.....#....
+'''
+    cells_with_text='auto'
 
 del ImageTest

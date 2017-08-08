@@ -77,7 +77,9 @@ def read_data(data,args):
 def process(grid,args):
     if args.print_testdata:
         from cross2sheet.test.test import print_tests
-        print_tests(grid)
+        url = args.input_file_or_url
+        url = url.replace('http://web.mit.edu/puzzle/www/','')
+        print_tests(url,grid)
     if args.autonumber:
         grid.features.extend(autonumber(grid))
     if args.outer_border:

@@ -55,7 +55,8 @@ def labels_to_string(g):
             grid[y][x]='*'
     return '\n'.join(''.join(r) for r in grid)
 
-def print_tests(grid):
+def print_tests(url,grid):
+    print('    url={}'.format(url))
     print('    rows={}'.format(grid.height))
     print('    cols={}'.format(grid.width))
     if any(isinstance(e,BackgroundElt) and e.color!=0xffffff for r,c,e in grid.features):
@@ -70,9 +71,15 @@ def print_tests(grid):
         print(bars_to_string(bordered))
         print("'''")
     if any(isinstance(e,TextElt) for r,c,e in grid.features):
-        print("    cells_with_text='''")
-        print(labels_to_string(grid))
-        print("'''")
+        label_str = labels_to_string(grid)
+        gr = Grid(grid.height,grid.width)
+        gr.features.extend(autonumber(gr))
+        if label_str == labels_to_string(grid):
+            print("    cells_with_text='auto'")
+        else:
+            print("    cells_with_text='''")
+            print(label_str)
+            print("'''")
 
 class ImageTest(unittest.TestCase):
 

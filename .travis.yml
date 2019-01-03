@@ -8,7 +8,7 @@ before_install:
   - pip install -U pip
 
 install:
-  - pip install -Ue .[opencv]
+  - pip install -Ue .
   - sudo apt-get -qq update
   - sudo apt-get -qq install ghostscript
 

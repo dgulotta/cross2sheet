@@ -11,10 +11,10 @@ setup(
         'beautifulsoup4',
         'numpy',
         'openpyxl',
+        'opencv-python',
         'Wand',
     ],
     extras_require = {
         'web': ['Flask'],
-        'opencv' : ['opencv-python']
     },
 )

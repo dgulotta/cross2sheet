@@ -18,11 +18,9 @@ Installing
 
 To install the required dependencies, run
 ```
-pip install -e .[opencv,web]
+pip install -e .[web]
 ```
 You can remove the `web` option if you don't want to use the web interface.
-If you get an error installing opencv-python (as seems to be the case on
-Gentoo), you can remove the `opencv` option and install OpenCV manually.
 
 Web interface
 =============

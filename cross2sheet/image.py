@@ -34,7 +34,7 @@ class ImageGrid:
 
     def detect_breaks(self):
         _,thr = cv2.threshold(self.gray,214,255,cv2.THRESH_BINARY)
-        _,con,_ = cv2.findContours(thr,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+        con = cv2.findContours(thr,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)[-2]
         squares=[c for c in con if self._contour_is_square(c) and cv2.contourArea(c)>=16]
         if not squares:
             return ([],[])

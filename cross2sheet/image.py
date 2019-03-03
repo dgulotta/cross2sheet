@@ -113,7 +113,7 @@ class ImageGrid:
     @staticmethod
     def _find_text_rect(img):
         _,thr = cv2.threshold(img,128,1,cv2.THRESH_BINARY)
-        _,con,_ = cv2.findContours(thr,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+        con = cv2.findContours(thr,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)[-2]
         if len(con)<=1:
             return None
         x,y,w,h=cv2.boundingRect(numpy.concatenate(con[:-1]))
@@ -123,7 +123,7 @@ class ImageGrid:
     @staticmethod
     def _has_text_rect(img):
         _,thr = cv2.threshold(img,128,255,cv2.THRESH_BINARY)
-        _,con,_ = cv2.findContours(thr,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+        con = cv2.findContours(thr,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)[-2]
         if len(con)>=2:
             return True
         elif len(con)==1:

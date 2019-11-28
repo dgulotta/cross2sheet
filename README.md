@@ -26,10 +26,17 @@ Web interface
 =============
 
 Cross2sheet can be used via a web interface, as a command line program, or
-as a library.  The web interface is the easiest to use.  It uses Flask;
-instructions for deploying Flask applications can be found at
-http://flask.pocoo.org/docs/0.12/deploying/.  The main source file for the
-web interface is `cross2sheet/web/__init__.py`.
+as a library.  The web interface is the easiest to use.  The code for the web
+interface can be found in the `cross2sheet/web` directory.
+
+To test the web interface locally:
+```
+export FLASK_APP=cross2sheet/web/__init__.py
+flask run
+```
+
+Instructions for deploying Flask applications can be found at
+https://flask.palletsprojects.com/en/1.1.x/deploying/.
 
 Command line interface
 ======================

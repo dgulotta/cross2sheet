@@ -981,6 +981,7 @@ class CrossedSwords(ImageTest):
     #cells_with_text='auto'
     #highlighted squares on diagonal
 
+@unittest.skip('the pdf seems to have been corrupted')
 class IndescribableAmorphousCryptic(ImageTest):
     url='2016/puzzle/the_indescribable_amorphous_cryptic/images/puzzle.pdf'
     rows=13

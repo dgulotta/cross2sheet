@@ -168,7 +168,7 @@ class ImageGrid:
                     continue
                 small = small[rect]
                 cv2.imwrite(fn,small)
-                txt=subprocess.check_output([ocr_cmd,fn,'stdout','-psm','8','-c','tessedit_char_whitelist=%s'%allowed_chars],stderr=subprocess.DEVNULL).decode().strip()
+                txt=subprocess.check_output([ocr_cmd,fn,'stdout','--psm','8','-c','tessedit_char_whitelist=%s'%allowed_chars],stderr=subprocess.DEVNULL).decode().strip()
                 if txt:
                     elts.append((r,c,TextElt(txt)))
         os.remove(fn)

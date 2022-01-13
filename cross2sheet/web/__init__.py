@@ -5,8 +5,7 @@ from cross2sheet.web.serial import TableData
 from cross2sheet.web.download import form_data_to_excel
 from urllib.request import urlopen
 from urllib.error import URLError
-from flask import flash, Response
-from werkzeug import FileWrapper
+from flask import flash
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH']=0x1000000
 
@@ -47,14 +46,8 @@ def display():
 
 @app.route("/download",methods=['POST'])
 def download():
-    f = form_data_to_excel(request.form)
-    w = FileWrapper(f)
-    response = Response(w, direct_passthrough=True)
-    response.headers.set('Content-Type',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response.headers.set('Content-Disposition', 'attachment',
-        filename='grid.xlsx')
-    return response
+    f=form_data_to_excel(request.form)
+    return send_file(f,as_attachment=True,attachment_filename='grid.xlsx',mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 if __name__ == "__main__":
     app.run()
